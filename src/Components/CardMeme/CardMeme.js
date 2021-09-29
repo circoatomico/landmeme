@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React, {Component} from 'react'; 
 
 import { styled } from '@material-ui/core/styles';  
@@ -14,8 +13,6 @@ import {
 
 // import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-
-
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -112,8 +109,8 @@ class CardMeme extends Component {
                    
                   <Divider sx={{margin: '10px'}}/>
 
-                   {/* eslint-disable-next-line */}
                   <div style={{position:'relative', paddingBottom: '100vh'}}>
+                    {/* eslint-disable-next-line */}
                     <iframe src='https://gfycat.com/ifr/ScholarlyGaseousBeetle' frameborder='0' scrolling='no' width='100%' height='100%' style={{position: 'absolute',top: '0', left:'0'}} allowfullscreen></iframe>
                   </div>
 

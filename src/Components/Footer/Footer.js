@@ -2,15 +2,13 @@ import React, {Component} from 'react';
 
 import {   
   AppBar, 
-  Container, 
-  Button,
+  Container,
   List,
   ListItem,
   ListItemText,
   ListItemButton,
   Grid, 
-  Typography,
-  Stack
+  Typography
 } from '@material-ui/core'; 
  
  

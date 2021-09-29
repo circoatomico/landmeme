@@ -1,32 +1,13 @@
 // eslint-disable-next-line
 import React, {Component} from 'react'; 
 
-import { styled } from '@material-ui/core/styles';  
- 
 import { 
   Grid,
-  Container,
-  Paper,
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent, 
-  Typography,
-  Button, 
-  CardActionArea, 
-  CardActions
+  Container
 } from '@material-ui/core'; 
 
-import MenuIcon from '@material-ui/icons/Menu';
 import CardMeme from '../CardMeme/CardMeme';
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  marginTop: '10px',
-  color: theme.palette.text.secondary,
-}));
+import HeaderSearch from '../HeaderSearch/HeaderSearch';
 
 const memes = [
   {
@@ -67,7 +48,7 @@ class Display extends Component {
       <Container sx={{paddingTop: 5}}>
         <Grid container spacing={2}>
 
-          <Grid item xs={8} spacing={5}>
+          <Grid item xs={12} sm={12} md={8} lg={8} spacing={5}>
             
               <CardMeme 
                 memes={memes} 
@@ -76,7 +57,15 @@ class Display extends Component {
             
           </Grid>
 
-          <Grid item xs={1} spacing={5}>
+          <Grid 
+            item 
+            xs={12}
+            sm={12}
+            md={4}
+            lg={4}
+            spacing={5}
+          >
+          < HeaderSearch />
           </Grid>
  
         </Grid>
