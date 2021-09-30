@@ -1,5 +1,7 @@
 import React, {Component} from 'react'; 
 
+import { Link } from 'react-router-dom';
+
 import {   
   AppBar, 
   Container,
@@ -7,8 +9,7 @@ import {
   ListItem,
   ListItemText,
   ListItemButton,
-  Grid, 
-  Typography
+  Grid
 } from '@material-ui/core'; 
  
  
@@ -23,6 +24,10 @@ class Footer extends Component {
     const { text, classes } = this.props;
     console.log(text)
     console.log(classes)
+
+    const mystyle = {
+      color: "white",  
+    };
  
     return ( 
       <AppBar 
@@ -35,43 +40,58 @@ class Footer extends Component {
           
 
             <Grid container>
-              <Grid sx={6} align="center"> 
+              <Grid md={6} align="center"> 
+
                 <img 
                   src="./monkey.png" 
                   alt="logo"  
                   style={{
-                    maxWidth: "10%"
+                    maxWidth: "50%"
                   }}
                   
                 />
-
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  To de Boa
-                </Typography>
+ 
               </Grid>
 
-              <Grid sx={6}>
-                {/* <Stack spacing={2}>
-                  <span color="inherit">Contato</span> 
-                </Stack> */}
-
-                <h1> Contato </h1>
+              <Grid md={6} > 
+ 
                 <List
                   sx={{ width: '100%', maxWidth: 360, bgcolor: 'inherit' }}
                   aria-label="contacts"
                 >
 
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemText primary="Chelsea Otakan" />
-                    </ListItemButton>
-                  </ListItem>
+                  <Link to="/gifs">
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <ListItemText style={mystyle} primary="Gifs" />
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
 
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemText primary="Eric Hoffman" />
-                    </ListItemButton>
-                  </ListItem>
+                  <Link to="/videos">
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <ListItemText  style={mystyle}
+                          primary="Vídeos" />
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
+
+                  <Link to="/imagens">
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <ListItemText style={mystyle} primary="Imagens" />
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
+
+                  <Link to="/coletaneas">
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <ListItemText style={mystyle}  primary="Coletâneas" />
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
 
                 </List>
 

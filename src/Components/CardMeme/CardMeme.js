@@ -8,17 +8,14 @@ import moment from 'moment';
 
 import parse from 'html-react-parser';
 
-import { Link, MemoryRouter, Route } from 'react-router-dom';
+// import { Link, MemoryRouter, Route } from 'react-router-dom';
 
 import { 
   Grid,
   Divider,
   Paper, 
   Typography, 
-  Chip,
-  Pagination,
-  PaginationItem,
-  Stack
+  Chip
   // Button,
   // Accordion,
   // AccordionSummary,
@@ -75,8 +72,7 @@ class CardMeme extends Component {
                 item 
                 xs={12} 
                 sm={12} 
-                md={12} 
-                spacing={2}
+                md={12}  
               >
                 <Item>
                   <Grid container>
@@ -84,8 +80,7 @@ class CardMeme extends Component {
                       item 
                       xs={10} 
                       sm={10} 
-                      md={10}
-                      spacing={1}
+                      md={10} 
                     >
                       
                       <Typography 
@@ -115,13 +110,13 @@ class CardMeme extends Component {
                       item 
                       xs={2} 
                       sm={2} 
-                      md={2} 
-                      spacing={1}
+                      md={2}  
                       sx={{overflow: 'hidden'}}
                     >
                       
                       {meme.categories.map( (categorie) => (
                         <Chip 
+                          key={categorie + meme.id}
                           sx={{margin: '2px', overflow: 'hidden'}} 
                           label={categorie} 
                           size="small" 
@@ -167,28 +162,7 @@ class CardMeme extends Component {
             </Grid>
           ))
         } 
-
-        <MemoryRouter initialEntries={['/inbox']} initialIndex={0}>
-          <Route>
-            {({ location }) => {
-              const query = new URLSearchParams(location.search);
-              const page = parseInt(query.get('page') || '1', 10);
-              return (
-                <Pagination
-                  page={page}
-                  count={10}
-                  renderItem={(item) => (
-                    <PaginationItem
-                      component={Link}
-                      to={`/inbox${item.page === 1 ? '' : `?page=${item.page}`}`}
-                      {...item}
-                    />
-                  )}
-                />
-              );
-            }}
-          </Route>
-        </MemoryRouter>
+ 
       </div>   
       
     );

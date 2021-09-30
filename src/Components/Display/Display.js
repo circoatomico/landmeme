@@ -60,7 +60,7 @@ class Display extends Component {
       <Container sx={{paddingTop: 5}}>
         <Grid container spacing={2}>
 
-          <Grid item xs={12} sm={12} md={8} lg={8} spacing={5}>
+          <Grid item xs={12} sm={12} md={8} lg={8}  >
             
               <CardMeme 
                 memes={memes} 
@@ -74,8 +74,7 @@ class Display extends Component {
             xs={12}
             sm={12}
             md={4}
-            lg={4}
-            spacing={5}
+            lg={4} 
             sx={{paddingTop: '25px'}}
           >
           < HeaderSearch />

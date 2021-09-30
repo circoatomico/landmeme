@@ -54,7 +54,7 @@ export default function LongMenu() {
         }}
       >
         {options.map((option) => ( 
-          <LinkRouter to={option}>
+          <LinkRouter to={option} key={'link_' + option}>
             <MenuItem 
               key={option} 
               selected={option === 'Pyxis'} 

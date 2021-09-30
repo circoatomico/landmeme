@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from '../../Components/Header/Header';
 import Display from '../../Components/Display/Display';
 import Footer from '../../Components/Footer/Footer';
+import PagesPagination from '../../Components/Pagination/Pagination';
 
 import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@emotion/react';
@@ -49,6 +50,8 @@ class Blog extends Component {
               <Header />
 
               <Display />
+
+              <PagesPagination />
 
               <Footer />
             
