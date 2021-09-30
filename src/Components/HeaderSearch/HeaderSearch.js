@@ -1,10 +1,18 @@
 import * as React from 'react';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
+import {
+  Box,
+  TextField,
+  Grid
+} from '@material-ui/core';
 import Autocomplete from '@material-ui/core/Autocomplete';
 
 export default function HeaderSearch() {
   return (
+
+    <Grid container>
+      <Grid item>
+
+    
     <Autocomplete
       id="search-select-demo"
       sx={{ width: 300 }}
@@ -34,6 +42,9 @@ export default function HeaderSearch() {
         />
       )}
     />
+    </Grid>
+    </Grid>
+
   );
 }
 

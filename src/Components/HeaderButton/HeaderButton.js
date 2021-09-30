@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Link as LinkMaterial } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from 'react-router-dom';
+import { Link as LinkRouter } from 'react-router-dom';
 
 const options = [
   'GIFs',
@@ -25,7 +25,7 @@ export default function LongMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+    
   return (
     <div>
       <IconButton
@@ -53,16 +53,25 @@ export default function LongMenu() {
           },
         }}
       >
-        {options.map((option) => (
-          <Link to={option}> 
+        {options.map((option) => ( 
+          <LinkRouter to={option}>
             <MenuItem 
               key={option} 
               selected={option === 'Pyxis'} 
               onClick={handleClose}
-            >
-            {option}
-            </MenuItem>
-          </Link> 
+              >
+              <LinkMaterial 
+                to={option} 
+                underline="none"
+                sx={{
+                  color: 'black', 
+                  textDecoration: 'none', 
+                  fontFamily:  'Comfortaa !important'}}
+                > 
+              {option}
+              </LinkMaterial> 
+            </MenuItem> 
+          </LinkRouter>
         ))}
       </Menu>
     </div>

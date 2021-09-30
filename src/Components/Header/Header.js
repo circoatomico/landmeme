@@ -40,7 +40,7 @@ class Header extends Component {
             src="./monkey.png" 
             alt="logo"  
             style={{
-              maxWidth: "20%"
+              maxWidth: "22%"
             }}
             
           />
@@ -52,7 +52,14 @@ class Header extends Component {
             <LongMenu />
           </Box>
           <Box 
-            display={{xs: 'none', sm: 'none', md: 'block', lg: 'block'}}>
+            sx={{fontFamily: 'Comfortaa'}}
+            display={{
+              xs: 'none', 
+              sm: 'none', 
+              md: 'block', 
+              lg: 'block'
+            }}
+          >
             <Button color="inherit">Gifs</Button>
             <Button color="inherit">Vídeos</Button>
             <Button color="inherit">Imagens</Button>

@@ -1,18 +1,34 @@
 import React, {Component} from 'react'; 
 
 import { styled } from '@material-ui/core/styles';  
- 
+import 'moment/locale/pt-br';
+
+
+import moment from 'moment';
+
+import parse from 'html-react-parser';
+
+import { Link, MemoryRouter, Route } from 'react-router-dom';
+
 import { 
   Grid,
   Divider,
   Paper, 
   Typography, 
   Chip,
-  Button
+  Pagination,
+  PaginationItem,
+  Stack
+  // Button,
+  // Accordion,
+  // AccordionSummary,
+  // AccordionDetails,
+    
 } from '@material-ui/core';  
 
 // import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+// import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -21,6 +37,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 class CardMeme extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      opened: []
+    };
+  }
 
   disqus() { 
     var d = document, s = d.createElement('script');
@@ -34,18 +58,18 @@ class CardMeme extends Component {
     this.disqus()
   }
 
+  
   render() {
-
-    const { memes, classes } = this.props;
-    console.log(memes)
-    console.log(classes)
+    const { memes } = this.props;
+    
+    // memes.map( (meme) => ( ))
 
     return ( 
    
       <div>
         {
           memes.map((meme) => (
-            <Grid container>
+            <Grid container key={meme.id} sx={{marginBottom: '20px'}}>
 
               <Grid 
                 item 
@@ -69,6 +93,7 @@ class CardMeme extends Component {
                         paragraph={false} 
                         gutterBottom 
                         component="p"
+                        sx={{}}
                       >
                         {meme.title} 
                       </Typography>
@@ -82,7 +107,7 @@ class CardMeme extends Component {
                         gutterBottom 
                         component="p"
                       >
-                        8 horas atrás
+                        {moment(meme.created_at).locale('pt-br').fromNow()}
                       </Typography>
                     </Grid>
 
@@ -92,11 +117,12 @@ class CardMeme extends Component {
                       sm={2} 
                       md={2} 
                       spacing={1}
+                      sx={{overflow: 'hidden'}}
                     >
                       
                       {meme.categories.map( (categorie) => (
                         <Chip 
-                          sx={{margin: '2px'}} 
+                          sx={{margin: '2px', overflow: 'hidden'}} 
                           label={categorie} 
                           size="small" 
                           variant="outlined" 
@@ -109,9 +135,13 @@ class CardMeme extends Component {
                    
                   <Divider sx={{margin: '10px'}}/>
 
-                  <div style={{position:'relative', paddingBottom: '100vh'}}>
+                  <div style={{position:'relative'}}>
                     {/* eslint-disable-next-line */}
-                    <iframe src='https://gfycat.com/ifr/ScholarlyGaseousBeetle' frameborder='0' scrolling='no' width='100%' height='100%' style={{position: 'absolute',top: '0', left:'0'}} allowfullscreen></iframe>
+                    {
+                      parse(meme.url)
+
+                    }
+
                   </div>
 
                   <Divider sx={{margin: '10px'}}/>
@@ -120,24 +150,16 @@ class CardMeme extends Component {
                     variant="body1" 
                     gutterBottom
                     align='center'
+                    sx={{
+                      paddingTop: '15px',
+                      paddingBottom: '15px'
+                    }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-                    blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,<br/>
-                    neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
-                    quasi quidem quibusdam.
+                    {meme.description}
                   </Typography>
 
                   {/* <div id="disqus_thread"></div> */}
 
-                  <Button 
-                    size="small" 
-                    color="primary" 
-                    variant="contained"
-                    startIcon={<ChatBubbleOutlineIcon />}
-                  >
-                    
-                    Comentários
-                  </Button>
 
                 </Item>
             
@@ -145,6 +167,28 @@ class CardMeme extends Component {
             </Grid>
           ))
         } 
+
+        <MemoryRouter initialEntries={['/inbox']} initialIndex={0}>
+          <Route>
+            {({ location }) => {
+              const query = new URLSearchParams(location.search);
+              const page = parseInt(query.get('page') || '1', 10);
+              return (
+                <Pagination
+                  page={page}
+                  count={10}
+                  renderItem={(item) => (
+                    <PaginationItem
+                      component={Link}
+                      to={`/inbox${item.page === 1 ? '' : `?page=${item.page}`}`}
+                      {...item}
+                    />
+                  )}
+                />
+              );
+            }}
+          </Route>
+        </MemoryRouter>
       </div>   
       
     );
