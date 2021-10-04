@@ -11,6 +11,27 @@ import { ThemeProvider } from '@emotion/react';
 
 class Blog extends Component {
 
+  state = {
+    themeColor: "#1976d2"
+  }
+
+  handleUpdate = (color) => {
+
+    this.setState({themeColor: color})
+
+    if (color == "#1976d2") {
+      document.body.style = 'background: #f8f8f8 !important';
+    } else {
+      document.body.style = 'background: #808080 !important';
+    }
+    
+
+    // if (color == 'light') {
+    // } else {
+    //   this.setState({themeColor: '#292727'})
+    // }
+  }
+
   componentDidMount() {
     // console.log(classes)
   }
@@ -44,12 +65,17 @@ class Blog extends Component {
     return ( 
       <ThemeProvider theme={theme}>
 
-        <React.Fragment>
-          <CssBaseline />
+        <React.Fragment >
+          <CssBaseline  />
 
-              <Header />
+              <Header 
+                updateState={this.handleUpdate}
+                themeColor={this.state.themeColor} 
+              />
 
-              <Display />
+              <Display
+                themeColor={this.state.themeColor}
+              />
 
               <PagesPagination />
 
@@ -62,3 +88,6 @@ class Blog extends Component {
 }
 
 export default (Blog);
+
+
+// background-color: #f8f8f8 !important;

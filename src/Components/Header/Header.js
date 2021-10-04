@@ -1,5 +1,4 @@
 import React, {Component} from 'react'; 
- 
 
 import {
   AppBar, 
@@ -9,47 +8,46 @@ import {
   Toolbar,
   Typography
 } from '@material-ui/core'; 
-import LongMenu from '../HeaderButton/HeaderButton';
 
- 
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+
+import LongMenu from '../HeaderButton/HeaderButton';
 
 class Header extends Component {
 
   componentDidMount() {
-    // console.log(classes)
   }
 
   render() {
 
-    const { text, classes } = this.props;
-    console.log(text)
-    console.log(classes)
+    const { themeColor } = this.props;
 
     return ( 
       <AppBar 
         position="static" 
-        enableColorOnDark={true}
-        color="primary"
+        sx={{backgroundColor: themeColor, transitionDelay: '0.5s'}}
       >
         <Container>
         <Toolbar 
           sx={{padding: 2}}
         >
 
-          <img 
+          <img             
             src="./monkey.png" 
             alt="logo"  
             style={{
               maxWidth: "22%"
             }}
-            
           />
           
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>
           <Box 
             display={{xs: '12', sm: '12', md: 'none', lg: 'none'}}>
-            <LongMenu />
+            <LongMenu
+              themeColor={this.props.themeColor}
+              updateState={this.props.updateState}
+            />
           </Box>
           <Box 
             sx={{fontFamily: 'Comfortaa'}}
@@ -64,6 +62,21 @@ class Header extends Component {
             <Button color="inherit">Vídeos</Button>
             <Button color="inherit">Imagens</Button>
             <Button color="inherit">Coletâneas</Button>
+            <Button 
+              variant="contained"
+              color="secondary"
+              onClick={ () => {
+                if ( this.props.themeColor === '#1976d2' ) {
+                  this.props.updateState('#242526')
+                } else {
+                  this.props.updateState('#1976d2')
+                }
+              } }
+            >
+              {(this.props.themeColor === '#1976d2') ? 'Apagar' : 'Acender'}
+              <WbIncandescentIcon />
+            </Button> 
+            
           </Box>
         </Toolbar>
         </Container>

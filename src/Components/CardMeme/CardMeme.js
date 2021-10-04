@@ -1,9 +1,8 @@
 import React, {Component} from 'react'; 
 
 import { styled } from '@material-ui/core/styles';  
+
 import 'moment/locale/pt-br';
-
-
 import moment from 'moment';
 
 import parse from 'html-react-parser';
@@ -57,7 +56,11 @@ class CardMeme extends Component {
 
   
   render() {
-    const { memes } = this.props;
+    const { memes, themeColor } = this.props;
+
+    console.log('render card meme')
+
+    console.log(themeColor)
     
     // memes.map( (meme) => ( ))
 
@@ -72,15 +75,22 @@ class CardMeme extends Component {
                 item 
                 xs={12} 
                 sm={12} 
-                md={12}  
+                md={12}
+                
               >
-                <Item>
+                <Item
+                  sx={{
+                    backgroundColor: this.props.themeColor === '#1976d2' ? '#fff' : '#242526',
+                    color: this.props.themeColor === '#1976d2' ? 'black' : 'white'
+                  }}
+                >
                   <Grid container>
                     <Grid 
                       item 
                       xs={10} 
                       sm={10} 
                       md={10} 
+                      
                     >
                       
                       <Typography 
@@ -154,7 +164,6 @@ class CardMeme extends Component {
                   </Typography>
 
                   {/* <div id="disqus_thread"></div> */}
-
 
                 </Item>
             

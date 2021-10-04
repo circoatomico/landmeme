@@ -1,9 +1,15 @@
 import * as React from 'react';
-import { IconButton, Link as LinkMaterial } from '@material-ui/core';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Link as LinkRouter } from 'react-router-dom';
+
+import {
+  IconButton, 
+  Link as LinkMaterial,
+  Menu,
+  MenuItem
+} from '@material-ui/core/';
+
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const options = [
   'GIFs',
@@ -12,11 +18,25 @@ const options = [
   'Coletâneas'
 ];
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 80;
 
-export default function LongMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+class LongMenu extends React.Component{
+
+  state= {
+    anchorEl: null
+  }
+
+  handleUpdate = (color) => {
+    this.setState({themeColor: color})
+  }
+
+  render() { 
+  
+  const setAnchorEl = (anchorEl) => {
+    this.setState({anchorEl})
+  }
+
+  const open = Boolean(this.state.anchorEl);
   
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,6 +45,7 @@ export default function LongMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
     
   return (
     <div>
@@ -43,7 +64,7 @@ export default function LongMenu() {
         MenuListProps={{
           'aria-labelledby': 'long-button',
         }}
-        anchorEl={anchorEl}
+        anchorEl={this.state.anchorEl}
         open={open}
         onClose={handleClose}
         PaperProps={{
@@ -53,6 +74,32 @@ export default function LongMenu() {
           },
         }}
       >
+        <MenuItem
+          onClick={ () => {
+            if ( this.props.themeColor === '#1976d2' ) {
+              this.props.updateState('#242526')
+            } else {
+              this.props.updateState('#1976d2')
+            }
+          }}
+        >
+          <LinkMaterial  
+            underline="none"
+            sx={{
+              color: 'black', 
+              textDecoration: 'none', 
+              fontFamily:  'Comfortaa !important'}}
+            >  
+            
+            <span > 
+              {(this.props.themeColor === '#1976d2') ? 'Apagar ' : 'Acender '}              
+              <WbIncandescentIcon />                
+            </span>
+
+          </LinkMaterial> 
+        </MenuItem> 
+
+
         {options.map((option) => ( 
           <LinkRouter to={option} key={'link_' + option}>
             <MenuItem 
@@ -73,7 +120,11 @@ export default function LongMenu() {
             </MenuItem> 
           </LinkRouter>
         ))}
-      </Menu>
-    </div>
-  );
+
+    </Menu>
+  </div>
+  );}
 }
+
+export default (LongMenu);
+ 

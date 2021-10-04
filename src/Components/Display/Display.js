@@ -52,7 +52,7 @@ class Display extends Component {
 
   render() {
 
-    const { text, classes } = this.props;
+    const { text, classes, themeColor } = this.props;
     console.log(text)
     console.log(classes)
 
@@ -64,6 +64,7 @@ class Display extends Component {
             
               <CardMeme 
                 memes={memes} 
+                themeColor={themeColor}
               > 
               </CardMeme>
             
