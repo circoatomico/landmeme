@@ -7,7 +7,8 @@ import {
   Container,
   Grid,
   Pagination,
-  PaginationItem
+  PaginationItem,
+  Stack
 } from '@material-ui/core';  
 
 
@@ -32,6 +33,10 @@ class PagesPagination extends Component {
           sx={{textAlign: 'center', }}
         >
           <Box sx={{textAlign: 'center'}}>
+          <Stack spacing={2}>
+            <Pagination count={10} shape="rounded" />
+            <Pagination count={10} variant="outlined" shape="rounded" />
+          </Stack>
           <MemoryRouter initialEntries={['/page']} initialIndex={0}>
             <Route>
               {({ location }) => {

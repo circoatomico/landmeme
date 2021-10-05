@@ -10,16 +10,18 @@ import {
 
 import CardMeme from '../CardMeme/CardMeme';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
-
-const memes = []
-
+ 
 class Display extends Component {
  
+  constructor(props) {
+    super(props);
 
-  state = {
-    memes: [],
-    keyCardMeme: 1,
+    this.state = {
+      memes: [],
+      keyCardMeme: 1
+    }
   }
+
 
   updateMemes(posts) {
 
@@ -32,8 +34,9 @@ class Display extends Component {
     var self = this
     await axios.get('http://localhost:3001/posts')
     .then(function (response) {
-      self.setState({memes: response.data})
-      self.setState({keyCardMeme: 2})
+      console.log(response.data)
+      self.setState({memes: response.data })
+      // self.setState({keyCardMeme: 2})
     })
     .catch(function (error) {
       // handle error
@@ -53,6 +56,7 @@ class Display extends Component {
   }
 
   render() {
+ 
 
     const { themeColor } = this.props;
 
@@ -64,7 +68,7 @@ class Display extends Component {
             
               <CardMeme 
                 key={this.state.keyCardMeme}
-                memes={memes} 
+                memes={this.state.memes} 
                 themeColor={themeColor}
               > 
               </CardMeme>

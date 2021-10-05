@@ -62,8 +62,7 @@ class CardMeme extends Component {
 
     return ( 
    
-      <div>
-        {memes}
+      <div> 
         {
           memes.map((meme) => (
             <Grid container key={meme.id} sx={{marginBottom: '20px'}}>
