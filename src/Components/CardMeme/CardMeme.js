@@ -36,9 +36,11 @@ class CardMeme extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       date: new Date(),
-      opened: []
+      opened: [],
+      memes: this.props.memes,
     };
   }
 
@@ -51,22 +53,17 @@ class CardMeme extends Component {
 
   componentDidMount() {
     // console.log(this.memes)
-    this.disqus()
+    // this.disqus()
   }
 
   
   render() {
-    const { memes, themeColor } = this.props;
-
-    console.log('render card meme')
-
-    console.log(themeColor)
-    
-    // memes.map( (meme) => ( ))
+    const { memes } = this.props;
 
     return ( 
    
       <div>
+        {memes}
         {
           memes.map((meme) => (
             <Grid container key={meme.id} sx={{marginBottom: '20px'}}>
@@ -127,7 +124,11 @@ class CardMeme extends Component {
                       {meme.categories.map( (categorie) => (
                         <Chip 
                           key={categorie + meme.id}
-                          sx={{margin: '2px', overflow: 'hidden'}} 
+                          sx={{
+                            margin: '2px', 
+                            overflow: 'hidden',
+                            color: this.props.themeColor === '#1976d2' ? 'black' : 'white'
+                          }} 
                           label={categorie} 
                           size="small" 
                           variant="outlined" 

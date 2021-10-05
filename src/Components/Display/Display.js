@@ -1,6 +1,8 @@
 // eslint-disable-next-line
 import React, {Component} from 'react'; 
 
+import axios from 'axios';
+
 import { 
   Grid,
   Container
@@ -9,52 +11,50 @@ import {
 import CardMeme from '../CardMeme/CardMeme';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
 
-const memes = [
-  {
-    id: 1,
-    title: "Eai mano kkkkkk",
-    categories: ["dog", "raiva", "Morra Seiya"],
-    created_at: "2021-09-5 00:00:00",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur.",
-    url: `<div style='position:relative; padding-bottom:calc(60.50% + 44px)'><iframe src='https://gfycat.com/ifr/QueasyForcefulFlea' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>`
-  },
-  {
-    id: 2,
-    title: "Eai mano kkkkkk",
-    categories: ["cat", "raiva"],
-    created_at: "2021-09-5 00:00:00",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur.",
-    url: `<div style='position:relative; padding-bottom:calc(60.50% + 44px)'><iframe src='https://gfycat.com/ifr/QueasyForcefulFlea' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>`
-  },
-  {
-    id: 3,
-    title: "Eai mano kkkkkk",
-    categories: ["ahah", "raiva"],
-    created_at: "2021-09-5 00:00:00",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur.",
-    url: `<div style='position:relative; padding-bottom:calc(60.50% + 44px)'><iframe src='https://gfycat.com/ifr/QueasyForcefulFlea' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>`
-  },
-  {
-    id: 4,
-    title: "Eai mano kkkkkk",
-    categories: [],
-    created_at: "2021-09-5 00:00:00",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur.",
-    url: `<div style='position:relative; padding-bottom:calc(60.50% + 44px)'><iframe src='https://gfycat.com/ifr/QueasyForcefulFlea' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>`
-  }
-]
+const memes = []
 
 class Display extends Component {
+ 
+
+  state = {
+    memes: [],
+    keyCardMeme: 1,
+  }
+
+  updateMemes(posts) {
+
+    this.setState({memes: posts})
+
+  }
+ 
+  async getPosts() {
+    // this.setState({memes: []}) 
+    var self = this
+    await axios.get('http://localhost:3001/posts')
+    .then(function (response) {
+      self.setState({memes: response.data})
+      self.setState({keyCardMeme: 2})
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+
+
+  }
 
   componentDidMount() {
-    // console.log(classes)
+    
+    this.getPosts()
+
   }
 
   render() {
 
-    const { text, classes, themeColor } = this.props;
-    console.log(text)
-    console.log(classes)
+    const { themeColor } = this.props;
 
     return ( 
       <Container sx={{paddingTop: 5}}>
@@ -63,6 +63,7 @@ class Display extends Component {
           <Grid item xs={12} sm={12} md={8} lg={8}  >
             
               <CardMeme 
+                key={this.state.keyCardMeme}
                 memes={memes} 
                 themeColor={themeColor}
               > 

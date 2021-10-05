@@ -9,31 +9,46 @@ import PagesPagination from '../../Components/Pagination/Pagination';
 import { createTheme } from '@material-ui/core';
 import { ThemeProvider } from '@emotion/react';
 
+import Cookies from 'js-cookie'
+
 class Blog extends Component {
 
   state = {
     themeColor: "#1976d2"
   }
 
+  dateCookie() {
+    const date = new Date()
+    date.setMonth(date.getMonth() + 1)
+    return date
+  }
+
   handleUpdate = (color) => {
-
+    Cookies.set('themeColor', color, { expires: this.dateCookie() })
     this.setState({themeColor: color})
+    this.setBodyColor(color)
+  }
 
-    if (color == "#1976d2") {
+  setBodyColor(theme) {
+    if (theme === '#1976d2') {
       document.body.style = 'background: #f8f8f8 !important';
     } else {
       document.body.style = 'background: #808080 !important';
     }
-    
-
-    // if (color == 'light') {
-    // } else {
-    //   this.setState({themeColor: '#292727'})
-    // }
   }
 
-  componentDidMount() {
-    // console.log(classes)
+  componentDidMount() { 
+    
+    let theme = Cookies.get('themeColor') 
+
+    if (theme === undefined) {
+      theme = '#1976d2'
+      Cookies.set('themeColor', theme, { expires: this.dateCookie() })
+      this.setState({themeColor: theme})
+    } else {
+      this.setState({themeColor: theme})
+      this.setBodyColor(theme)
+    }
   }
 
   render() {
@@ -57,11 +72,7 @@ class Blog extends Component {
         },
       },
     });
-
-    const { text, classes } = this.props;
-    console.log(text)
-    console.log(classes)
-
+ 
     return ( 
       <ThemeProvider theme={theme}>
 

@@ -20,11 +20,7 @@ class Footer extends Component {
   }
 
   render() {
- 
-    const { text, classes } = this.props;
-    console.log(text)
-    console.log(classes)
-
+  
     const mystyle = {
       color: "white",  
     };
