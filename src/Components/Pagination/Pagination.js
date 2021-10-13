@@ -1,20 +1,30 @@
 import { Component } from "react";
+ 
+import { Link, withRouter } from "react-router-dom"
 
-import { Link, MemoryRouter, Route } from 'react-router-dom';
 
 import {
   Box,
   Container,
   Grid,
-  Pagination,
-  PaginationItem,
+  Pagination, 
   Stack
-} from '@material-ui/core';  
-
+} from '@material-ui/core';
 
 class PagesPagination extends Component {
 
+
+
+  routingFunction = (param, page) => {
+    this.props.history.push({
+      pathname: '/page/' + page,
+      state: page
+    });
+  }
+
   render() {
+
+    const { totalPages } = this.props;
 
     return (  
     <Container sx={{paddingTop: 5, textAlign: 'center'}}>
@@ -33,32 +43,18 @@ class PagesPagination extends Component {
           sx={{textAlign: 'center', }}
         >
           <Box sx={{textAlign: 'center'}}>
-          <Stack spacing={2}>
-            <Pagination count={10} shape="rounded" />
-            <Pagination count={10} variant="outlined" shape="rounded" />
-          </Stack>
-          <MemoryRouter initialEntries={['/page']} initialIndex={0}>
-            <Route>
-              {({ location }) => {
-                const query = new URLSearchParams(location.search);
-                const page = parseInt(query.get('page') || '1', 10);
-                return (
-                  <Pagination
-                    page={page}
-                    count={10}
-                    renderItem={(item) => (
-                      <PaginationItem
-                        component={Link}
-                        to={`/${item.page === 1 ? '' : `?page=${item.page}`}`}
-                        {...item}
-                      />
-                    )}
-                  />
-                );
-              }}
-            </Route>
-          </MemoryRouter>
+            <Stack spacing={2}>
+              <Pagination 
+                count={totalPages} 
+                shape="rounded"
+                onChange={ (obg, page) => {
+                  this.routingFunction(obg, page)
+                }}
+              />
+            </Stack>
           </Box>
+
+          <Link to="/page/3" > Teste </Link>
       </Grid>
     </Grid>
     </Container>
@@ -66,4 +62,4 @@ class PagesPagination extends Component {
   }
 } 
 
-export default (PagesPagination);
+export default withRouter(PagesPagination);

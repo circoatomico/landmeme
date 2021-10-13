@@ -23,6 +23,11 @@ ReactDOM.render(
       <Route path="/">
         <Blog />
       </Route>
+
+      <Route path="/page/:page?">
+        <Blog />
+      </Route>
+
     </Switch>
   </Router>
   , document.getElementById('root')

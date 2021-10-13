@@ -14,7 +14,8 @@ import Cookies from 'js-cookie'
 class Blog extends Component {
 
   state = {
-    themeColor: "#1976d2"
+    themeColor: "#1976d2",
+    totalPages: 0,
   }
 
   dateCookie() {
@@ -27,6 +28,12 @@ class Blog extends Component {
     Cookies.set('themeColor', color, { expires: this.dateCookie() })
     this.setState({themeColor: color})
     this.setBodyColor(color)
+  }
+
+  setTotalPages = (total = 1) => {
+    console.log('total')
+    console.log(total)
+    this.setState({totalPages: total})
   }
 
   setBodyColor(theme) {
@@ -52,6 +59,8 @@ class Blog extends Component {
   }
 
   render() {
+
+    console.log('rendering')
 
     const theme = createTheme({
       typography: {
@@ -86,9 +95,12 @@ class Blog extends Component {
 
               <Display
                 themeColor={this.state.themeColor}
+                updateTotalPages={this.setTotalPages} 
               />
-
-              <PagesPagination />
+              
+              <PagesPagination 
+                totalPages={this.state.totalPages}
+              />
 
               <Footer />
             

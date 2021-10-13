@@ -1,12 +1,17 @@
 // eslint-disable-next-line
 import React, {Component} from 'react'; 
 
+import { withRouter } from "react-router-dom";
+
+
 import axios from 'axios';
+import Cookies from 'js-cookie'
 
 import { 
   Grid,
   Container
 } from '@material-ui/core'; 
+ 
 
 import CardMeme from '../CardMeme/CardMeme';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
@@ -16,9 +21,12 @@ class Display extends Component {
   constructor(props) {
     super(props);
 
+    this.updateTotalPages = props.updateTotalPages;
+
     this.state = {
       memes: [],
-      keyCardMeme: 1
+      keyCardMeme: 1,
+      totalPages: 1
     }
   }
 
@@ -32,11 +40,10 @@ class Display extends Component {
   async getPosts() {
     // this.setState({memes: []}) 
     var self = this
-    await axios.get('http://localhost:3001/posts')
+    await axios.get('http://localhost:3001/posts/?_page=1&_limit=2')
     .then(function (response) {
-      console.log(response.data)
-      self.setState({memes: response.data })
-      // self.setState({keyCardMeme: 2})
+      self.setState({memes: response.data})
+      self.props.updateTotalPages( response.headers["x-total-count"] / 2 )
     })
     .catch(function (error) {
       // handle error
@@ -56,7 +63,14 @@ class Display extends Component {
   }
 
   render() {
- 
+
+    let { page } = this.props.match.params;    
+
+    console.log(this.props.match)
+    console.log(this.props.location)
+    console.log(this.props.history) 
+    console.log(page)
+    console.log('aquie')
 
     const { themeColor } = this.props;
 
@@ -92,4 +106,4 @@ class Display extends Component {
   }
 }
 
-export default (Display);
+export default withRouter(Display);
