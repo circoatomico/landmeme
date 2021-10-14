@@ -27,13 +27,20 @@ class Footer extends Component {
  
     return ( 
       <AppBar 
-        position="static" 
+        position="relative" 
         enableColorOnDark={true}
         color="primary"
-        sx={{marginTop: '20px', backgroundColor: "#292727"}}
-      >
+        sx={{
+          marginTop: '20px', 
+          backgroundColor: "#292727",
+          position: 'absolute',
+          right: '0',
+          bottom: '0',
+          left: '0',
+          padding: '1rem',
+          textAlign: 'center'
+        }} >
         <Container> 
-          
 
             <Grid container>
               <Grid md={6} align="center"> 

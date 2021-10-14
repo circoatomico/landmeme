@@ -5,6 +5,7 @@ import {
   Container,
   Box,
   Button,
+  ButtonGroup,
   Toolbar,
   Typography
 } from '@material-ui/core'; 
@@ -25,7 +26,7 @@ class Header extends Component {
     return ( 
       <AppBar 
         position="static" 
-        sx={{backgroundColor: themeColor, transitionDelay: '0.5s'}}
+        sx={{backgroundColor: themeColor, transition: 'all 0.2s ease-in'}}
       >
         <Container>
         <Toolbar 
@@ -58,11 +59,13 @@ class Header extends Component {
               lg: 'block'
             }}
           >
-            <Button color="inherit">Gifs</Button>
-            <Button color="inherit">Vídeos</Button>
-            <Button color="inherit">Imagens</Button>
-            <Button color="inherit">Coletâneas</Button>
+            <Button color="inherit" sx={{fontWeight: 'bold'}}>Gifs</Button>
+            <Button color="inherit" sx={{fontWeight: 'bold'}}>Vídeos</Button>
+            <Button color="inherit" sx={{fontWeight: 'bold'}}>Imagens</Button>
+            <Button color="inherit" sx={{fontWeight: 'bold'}}>Coletâneas</Button>
+
             <Button 
+            sx={{marginLeft: '20px'}}
               variant="contained"
               color="secondary"
               onClick={ () => {

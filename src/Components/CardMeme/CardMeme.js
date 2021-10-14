@@ -77,7 +77,8 @@ class CardMeme extends Component {
                 <Item
                   sx={{
                     backgroundColor: this.props.themeColor === '#1976d2' ? '#fff' : '#242526',
-                    color: this.props.themeColor === '#1976d2' ? 'black' : 'white'
+                    color: this.props.themeColor === '#1976d2' ? 'black' : 'white',
+                    transition: 'all 0.2s ease-in'
                   }}
                 >
                   <Grid container>

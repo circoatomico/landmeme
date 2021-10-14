@@ -1,6 +1,6 @@
 import { Component } from "react";
  
-import { Link, withRouter } from "react-router-dom"
+import { withRouter } from "react-router-dom"
 
 
 import {
@@ -53,8 +53,6 @@ class PagesPagination extends Component {
               />
             </Stack>
           </Box>
-
-          <Link to="/page/3" > Teste </Link>
       </Grid>
     </Grid>
     </Container>
